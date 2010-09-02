@@ -1,3 +1,4 @@
-*.jar
+zombie-pandemic-tracker.jar
+zombie-pandemic-tracker-standalone.jar
 bin
 classes
