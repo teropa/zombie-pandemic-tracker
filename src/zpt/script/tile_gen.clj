@@ -3,4 +3,4 @@
   (:use zpt.script.kml-parser))
 
 (defn -main [& args]
-  (parse "data/control_00010_I.kml"))
+  (parse ["data/control_00010_I.kml", "data/control_00011_I.kml"]))

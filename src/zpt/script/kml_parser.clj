@@ -9,7 +9,7 @@
         [(Double/valueOf lon) (Double/valueOf lat)]))
     (.split s " ")))
 
-(defn pull-step [parser rdr]
+(defn pull-step [parser idx rdr]
   (letfn [(step [parser tag-stack style]
             (condp = (.next parser)
               XmlPullParser/START_TAG
@@ -21,7 +21,7 @@
                   "coordinates"
                     (lazy-seq
                       (cons
-                        {:poly (parse-polygon (.getText parser)), :style style}
+                        {:poly (parse-polygon (.getText parser)), :style style, :idx idx}
                         (step parser tag-stack style)))
                   "styleUrl"
                     (recur parser tag-stack (.getText parser))
@@ -31,11 +31,18 @@
               (recur parser tag-stack style)))]
     (step parser [] nil)))
 
-(defn parse [file]
+(defn- parse-file [idx file]
   (let [fac (XmlPullParserFactory/newInstance)
         reader (FileReader. file)]
     (.setNamespaceAware fac true)
     (let [parser (.newPullParser fac)]
       (.setInput parser reader)
-      (pull-step parser reader))))
+      (pull-step parser idx reader))))
+
+(defn parse [files]
+  (apply
+    concat
+    (map-indexed parse-file files)))
+
+
   
