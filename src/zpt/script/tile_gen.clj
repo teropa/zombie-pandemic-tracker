@@ -6,6 +6,12 @@
 
 (def tile-size 256)
 (def num-zoom-levels 1)
+(def world-bounds [-2.0037508342789244E7
+                   -2.0037508342789244E7
+                   2.0037508342789244E7
+                   2.0037508342789244E7])
+(def world-width (- (world-bounds 2) (world-bounds 0)))
+(def world-height (- (world-bounds 3) (world-bounds 1)))
 
 (def zoomlevels
   (map
@@ -47,12 +53,21 @@
   false)
 
 (defn- translate-to-pixels [poly z]
-  poly)
+  (let [width-ratio (/ (:size z) world-width)
+        height-ratio (/ (:size z) world-height)]
+    (map
+      (fn [[lon lat]]
+        (let [from-left (- lon (world-bounds 0))
+              from-top (- (world-bounds 3) lat)]
+          [(* from-left width-ratio)
+           (* from-top height-ratio)]))
+      poly)))
+
 
 (defn- drawables [item]
   (let [projected (project-polygon (:poly item))]
     (map
-      #(merge item {:z %, :poly (translate-to-pixels projected %)})
+      #(merge item {:level %, :poly (translate-to-pixels projected %)})
       zoomlevels)))
 
 (defn- parse-all []
