@@ -63,6 +63,8 @@
            (* from-top height-ratio)]))
       poly)))
 
+(defn- assoc-color [poly]
+  (assoc poly :color (colors (:style poly))))
 
 (defn- drawables [item]
   (let [projected (project-polygon (:poly item))]
@@ -76,5 +78,7 @@
 (defn -main [& args]
   (doseq [part (partition-all 10000 (parse-all))]
     (draw
-      (remove wraps-date-line?
-        (mapcat drawables part)))))
+      (->> (mapcat drawables part)
+           (remove wraps-date-line?)
+           (map assoc-color)))))
+
