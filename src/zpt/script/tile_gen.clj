@@ -76,6 +76,7 @@
   (parse ["data/control_00010_I.kml", "data/control_00011_I.kml"]))
 
 (defn -main [& args]
+  (init-dirs)
   (doseq [part (partition-all 10000 (parse-all))]
     (draw
       (->> (mapcat drawables part)
