@@ -1,12 +1,11 @@
 (ns zpt.script.kml-parser
+  (:use zpt.util)
   (:import [java.io FileReader])
   (:import [org.xmlpull.v1 XmlPullParser XmlPullParserFactory]))
 
 (defn- parse-polygon [s]
   (map
-    (fn [point]
-      (let [[lon lat] (.split point "," 2)]
-        [(Double/valueOf lon) (Double/valueOf lat)]))
+    #(map parse-double (.split % ","))
     (.split s " ")))
 
 (defn pull-step [parser idx rdr]
@@ -40,9 +39,6 @@
       (pull-step parser idx reader))))
 
 (defn parse [files]
-  (apply
-    concat
-    (map-indexed parse-file files)))
-
+  (mapcat-indexed parse-file files))
 
   

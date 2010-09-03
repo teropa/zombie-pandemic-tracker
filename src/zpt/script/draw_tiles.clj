@@ -17,6 +17,9 @@
     polys))
   
 (defn draw [polys]
+  (println polys))
+
+(comment
 	(doseq [[tile polys-in-tile] (polys-grouped-by-tile polys)]
 	  (try
 		  (let [img-file (File. tile)
