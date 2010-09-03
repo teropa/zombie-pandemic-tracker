@@ -2,7 +2,9 @@
   (:gen-class)
   (:use zpt.script.kml-parser)
   (:use zpt.script.draw-tiles)
-  (:import [java.awt Color]))
+  (:import [java.awt Color])
+  (:import [java.io File])
+  (:import [org.apache.commons.io FileUtils]))
 
 (def tile-size 256)
 (def num-zoom-levels 1)
@@ -73,11 +75,14 @@
       zoomlevels)))
 
 (defn- parse-all []
-  (parse ["data/control_00010_I.kml", "data/control_00011_I.kml"]))
+  (let [extensions (make-array String 1)]
+    (aset extensions 0 "kml")
+    (parse (sort (FileUtils/listFiles (File. "data") extensions false)))))
 
 (defn -main [& args]
   (init-dirs)
   (doseq [part (partition-all 10000 (parse-all))]
+    (println "drawing")
     (draw
       (->> (mapcat drawables part)
            (remove wraps-date-line?)

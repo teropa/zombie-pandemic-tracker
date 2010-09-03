@@ -31,6 +31,7 @@
     (step parser [] nil)))
 
 (defn- parse-file [idx file]
+  (println "Parsing " file)
   (let [fac (XmlPullParserFactory/newInstance)
         reader (FileReader. file)]
     (.setNamespaceAware fac true)
