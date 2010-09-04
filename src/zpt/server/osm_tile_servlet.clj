@@ -1,5 +1,7 @@
 (ns zpt.server.osm-tile-servlet
   (:gen-class :extends "javax.servlet.http.HttpServlet")
+  (:use zpt.util)
+  (:require [zpt.server.osm-tile-cache-writer :as cache])
   (:import [java.awt.color ColorSpace])
   (:import [java.awt.image ColorConvertOp])
   (:import [javax.imageio ImageIO])
@@ -24,6 +26,7 @@
         img (grayscale (read-img z x y))]
     (.setContentType res "image/png")
     (with-open [out (.getOutputStream res)]
-      (ImageIO/write img "png" out)
-      (.flush out))))
-    
+      (stream-img img out)
+      (.flush out))
+    (cache/write-later img z x y)))
+

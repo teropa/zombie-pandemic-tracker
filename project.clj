@@ -13,10 +13,10 @@
                      [lein-gwt "0.1.0"]
                      [uk.org.alienscience/leiningen-war "0.0.7"]]
   
-  :namespaces [zpt.server.osm-tile-servlet]
+  :aot [zpt.server.osm-tile-servlet]
   
   :gwt-modules ["zpt.Client"]
-  :gwt-options {:style "PRETTY"
+  :gwt-options {:style "OBF"
                 :XdisableCastChecking ""
                 :XdisableClassMetadata ""}
   

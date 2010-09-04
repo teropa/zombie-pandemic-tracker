@@ -1,4 +1,6 @@
-(ns zpt.util)
+(ns zpt.util
+  (:import [java.io File])
+  (:import [javax.imageio ImageIO]))
 
 (defn mapcat-indexed
   "Returns the result of applying concat to the result
@@ -9,5 +11,9 @@
 (defn parse-double [#^String s]
   (Double/valueOf s))
 
+(defn write-img [img path]
+  (ImageIO/write img "png" (File. path)))
 
+(defn stream-img [img out]
+  (ImageIO/write img "png" #^java.io.OutputStream out))
 
