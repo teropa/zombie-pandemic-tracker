@@ -5,6 +5,16 @@
 
 <web-app>
     
+  <servlet>
+  	<servlet-name>osm_tile_servlet</servlet-name>
+  	<servlet-class>zpt.server.osm_tile_servlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+  	<servlet-name>osm_tile_servlet</servlet-name>
+  	<url-pattern>/tiles/osm/*</url-pattern>
+  </servlet-mapping>
+  
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
   </welcome-file-list>

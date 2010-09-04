@@ -12,5 +12,9 @@
 	<classpathentry kind="lib" path="lib/dev/gwt-incubator-20100204-r1747.jar"/>
 	<classpathentry kind="lib" path="lib/dev/gwt-user-2.0.4.jar"/>
 	<classpathentry kind="lib" path="lib/dev/mxhr-0.0.1-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="lib/dev/gwt-servlet-2.0.4.jar"/>
+	<classpathentry kind="lib" path="lib/commons-codec-1.2.jar"/>
+	<classpathentry kind="lib" path="lib/commons-httpclient-3.1.jar"/>
+	<classpathentry kind="lib" path="lib/commons-logging-1.0.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
