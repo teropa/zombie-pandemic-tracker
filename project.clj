@@ -9,8 +9,9 @@
                      [teropa/globetrotter "0.0.1-SNAPSHOT"]
                      [teropa/mxhr "0.0.1-SNAPSHOT"]
                      [lein-gwt "0.1.0"]]
+  
   :gwt-modules ["zpt.Client"]
-  :gwt-options {:XdisableCastChecking ""})
-
+  :gwt-options {:XdisableCastChecking ""
+                :XdisableClassMetadata ""})
 
 
