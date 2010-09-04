@@ -1,5 +1,7 @@
 (ns zpt.server.osm-tile-servlet
   (:gen-class :extends "javax.servlet.http.HttpServlet")
+  (:import [java.awt.color ColorSpace])
+  (:import [java.awt.image ColorConvertOp])
   (:import [javax.imageio ImageIO])
   (:import [org.apache.commons.httpclient HttpClient MultiThreadedHttpConnectionManager])
   (:import [org.apache.commons.httpclient.methods GetMethod]))
@@ -12,10 +14,14 @@
 	      (with-open [in (.getResponseBodyAsStream req)]
 	        (ImageIO/read in))
        (finally (.releaseConnection req))))))
+
+(defn- grayscale [img]
+  (let [convert (ColorConvertOp. (ColorSpace/getInstance ColorSpace/CS_GRAY) nil)]
+    (.filter convert img nil)))
   
 (defn -doGet [_ req res]
   (let [[_ z x y] (re-find #"\/(\d+)\/(\d+)\/(\d+).png" (.getPathInfo req))
-        img (read-img z x y)]
+        img (grayscale (read-img z x y))]
     (.setContentType res "image/png")
     (with-open [out (.getOutputStream res)]
       (ImageIO/write img "png" out)
