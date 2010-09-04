@@ -13,5 +13,3 @@
   :gwt-modules ["zpt.Client"]
   :gwt-options {:XdisableCastChecking ""
                 :XdisableClassMetadata ""})
-
-

@@ -5,7 +5,7 @@
   (:import [javax.imageio ImageIO])
   (:import [org.apache.commons.io FileUtils]))
   
-(def out-dir "public/tiles")
+(def out-dir "war/tiles")
 
 (defn- open-img [idx level]
   (let [f (File. (str out-dir "/" idx "/" level ".png"))]
