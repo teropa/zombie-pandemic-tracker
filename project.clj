@@ -14,7 +14,8 @@
                      [uk.org.alienscience/leiningen-war "0.0.7"]]
   
   :aot [zpt.server.osm-tile-servlet
-        zpt.server.solanum-tile-servlet]
+        zpt.server.solanum-tile-servlet
+        zpt.server.header-filter]
   
   :gwt-modules ["zpt.Client"]
   :gwt-options {:style "OBF"

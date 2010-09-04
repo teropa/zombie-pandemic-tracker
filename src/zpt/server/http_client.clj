@@ -7,7 +7,7 @@
 (let [client (HttpClient. (MultiThreadedHttpConnectionManager.))]
   
   (defn GET
-    "Makes a HTTP GET request to url, and executes callback
+    "Makes an HTTP GET request to url, and executes callback
      passing it the response input stream. Throws IOException
      if the server returns something else than 200"
     [url callback]

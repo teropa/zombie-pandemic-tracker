@@ -4,7 +4,17 @@
     "http://java.sun.com/dtd/web-app_2_3.dtd">
 
 <web-app>
-    
+
+  <filter>
+  	<filter-name>header_filter</filter-name>
+  	<filter-class>zpt.server.header_filter</filter-class>
+  </filter>
+
+  <filter-mapping>
+  	<filter-name>header_filter</filter-name>
+  	<url-pattern>/*</url-pattern>
+  </filter-mapping>
+          
   <servlet>
   	<servlet-name>osm_tile_servlet</servlet-name>
   	<servlet-class>zpt.server.osm_tile_servlet</servlet-class>
@@ -13,7 +23,7 @@
   	<servlet-name>solanum_tile_servlet</servlet-name>
   	<servlet-class>zpt.server.solanum_tile_servlet</servlet-class>
   </servlet>
-  
+
   <servlet-mapping>
   	<servlet-name>osm_tile_servlet</servlet-name>
   	<url-pattern>/tiles/osm/*</url-pattern>
