@@ -1,3 +1,4 @@
 *.jar
+*.war
 bin
 classes
