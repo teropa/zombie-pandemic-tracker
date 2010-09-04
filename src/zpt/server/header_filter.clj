@@ -15,6 +15,7 @@
   
 (defn -doFilter [_ req res chain]
   (set-cache-headers req res)
+  (.setCharacterEncoding res "UTF-8")
   (.doFilter chain req res))
 
 (defn -init [_ _])
