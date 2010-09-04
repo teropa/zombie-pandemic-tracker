@@ -5,7 +5,6 @@
 
 (defn- write [_ img z x y]
   (let [f (str base "/" z "/" x "/" y ".png")]
-    (println "Writing to cache:" f)
     (write-img img f)))
 
 (let [writer-agent (agent nil)]

@@ -9,12 +9,21 @@
   	<servlet-name>osm_tile_servlet</servlet-name>
   	<servlet-class>zpt.server.osm_tile_servlet</servlet-class>
   </servlet>
+  <servlet>
+  	<servlet-name>solanum_tile_servlet</servlet-name>
+  	<servlet-class>zpt.server.solanum_tile_servlet</servlet-class>
+  </servlet>
   
   <servlet-mapping>
   	<servlet-name>osm_tile_servlet</servlet-name>
   	<url-pattern>/tiles/osm/*</url-pattern>
   </servlet-mapping>
-  
+
+  <servlet-mapping>
+  	<servlet-name>solanum_tile_servlet</servlet-name>
+  	<url-pattern>/tiles/solanum/*</url-pattern>
+  </servlet-mapping>
+    
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>
   </welcome-file-list>
