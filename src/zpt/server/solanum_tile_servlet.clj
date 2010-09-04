@@ -1,5 +1,6 @@
 (ns zpt.server.solanum-tile-servlet
   (:gen-class :extends "javax.servlet.http.HttpServlet")
+  (:require [clojure.contrib.string :as string])
   (:import [java.io File])
   (:import [org.apache.commons.codec.binary Base64])
   (:import [org.apache.commons.io FileUtils]))
@@ -8,12 +9,13 @@
 
 (defn- requested-tiles [req]
   (map
-    #(.split % ",")
+    (fn [tile-spec]
+      (map #(Integer/parseInt %) (.split tile-spec ",")))
     (.getParameterValues req "t")))
 
 (defn- encode [file]
   (String.
-    (.encode (Base64.) 
+    (.encode (Base64.)
       (FileUtils/readFileToByteArray file))))
 
 (defn -doGet [_ req res]
@@ -30,11 +32,3 @@
     (.println out)
     (.println out "\n--|||--\n")
     (.flush out)))
-
-          
-            
-      
-      
-  
-
-
