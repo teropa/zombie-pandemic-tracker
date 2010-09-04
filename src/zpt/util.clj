@@ -6,7 +6,7 @@
   [f & colls]
   (apply concat (apply map-indexed f colls)))
 
-(defn parse-double [s]
+(defn parse-double [#^String s]
   (Double/valueOf s))
 
 

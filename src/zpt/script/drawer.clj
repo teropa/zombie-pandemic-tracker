@@ -1,4 +1,4 @@
-(ns zpt.script.draw-tiles
+(ns zpt.script.drawer
   (:import [java.awt Graphics2D])
   (:import [java.awt.image BufferedImage])
   (:import [java.io File])
@@ -21,6 +21,7 @@
 
 (defn draw [polys]
   (doseq [[{level :level, idx :idx} items] (group-by #(select-keys % [:level :idx]) polys)]
+    (println "Drawing" (count items) "to" idx "/" level) 
     (let [img (open-img idx level)
           #^Graphics2D g (.getGraphics img)]
       (doseq [{poly :poly, color :color} items]

@@ -3,12 +3,12 @@
   (:import [java.io FileReader])
   (:import [org.xmlpull.v1 XmlPullParser XmlPullParserFactory]))
 
-(defn- parse-polygon [s]
+(defn- parse-polygon [#^String s]
   (map
-    #(map parse-double (.split % ","))
+    #(map parse-double (.split #^String % ","))
     (.split s " ")))
 
-(defn pull-step [parser idx rdr]
+(defn pull-step [#^XmlPullParser parser idx rdr]
   (letfn [(step [parser tag-stack style]
             (condp = (.next parser)
               XmlPullParser/START_TAG

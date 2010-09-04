@@ -1,13 +1,14 @@
 (ns zpt.script.tile-gen
   (:gen-class)
   (:use zpt.script.kml-parser)
-  (:use zpt.script.draw-tiles)
+  (:use zpt.script.drawer)
+  (:use zpt.script.tile-cutter)
   (:import [java.awt Color])
   (:import [java.io File])
   (:import [org.apache.commons.io FileUtils]))
 
 (def tile-size 256)
-(def num-zoom-levels 1)
+(def num-zoom-levels 7)
 (def world-bounds [-2.0037508342789244E7
                    -2.0037508342789244E7
                    2.0037508342789244E7
@@ -20,7 +21,7 @@
     (fn [z]
       (let [tc (Math/pow 2 z)]
         {:z z, :tilecount tc, :size (* tile-size tc)}))
-    (range 1 (inc num-zoom-levels))))
+    (range 0 (inc num-zoom-levels))))
 
 (def colors
   {"#Style1" (Color. 183 25 25 140) ; r g b a
@@ -79,12 +80,16 @@
     (aset extensions 0 "kml")
     (parse (sort (FileUtils/listFiles (File. "data") extensions false)))))
 
-(defn -main [& args]
-  (init-dirs)
+(defn- draw-images []
   (doseq [part (partition-all 10000 (parse-all))]
     (println "drawing")
     (draw
       (->> (mapcat drawables part)
            (remove wraps-date-line?)
            (map assoc-color)))))
+    
+(defn gen-tiles []
+  (init-dirs)
+  (draw-images)
+  (cut-tiles))
 
