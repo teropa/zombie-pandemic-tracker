@@ -24,7 +24,6 @@ public class Client implements EntryPoint {
 
 	public final Resources resources = GWT.create(Resources.class);
 	
-	private final RootLayoutPanel root = RootLayoutPanel.get();
 	private Map map;
 	private EpidemicLayer solanum;
 	private TimeControl tc;
@@ -37,12 +36,12 @@ public class Client implements EntryPoint {
 		DockLayoutPanel dock = new DockLayoutPanel(Unit.PX);
 		initLeft(dock);
 		initMain(dock);
-		root.add(dock);
+		RootLayoutPanel.get().add(dock);
 		
 		// TODO: Find out why we need to do this
 		DeferredCommand.addCommand(new Command() {
 			public void execute() {
-				root.onResize();
+				RootLayoutPanel.get().onResize();
 			}
 		});
 	}
@@ -66,12 +65,6 @@ public class Client implements EntryPoint {
 		
 		mainPanel.add(map);
 		
-		
-//		map.getView().addViewClickHandler(new ViewClickEvent.Handler() {
-//			public void onViewClicked(ViewClickEvent event) {
-//				Window.alert(map.calc().getLonLat(event.point).toString());
-//			}
-//		});
 		tc = new TimeControl(solanum);
 		mainPanel.add(tc);
 		mainPanel.setWidgetBottomHeight(tc, 30, Unit.PX, 50, Unit.PX);
@@ -96,10 +89,6 @@ public class Client implements EntryPoint {
 		tweet.setStyleName("tweetButton");
 		left.addSouth(tweet, 30);
 		
-		HTML badge = HTML.wrap(Document.get().getElementById("ko"));
-		badge.setStyleName("koBadge");
-		left.addSouth(badge, 70);
-
 		Info info = new Info(this);
 		left.add(info);
 		

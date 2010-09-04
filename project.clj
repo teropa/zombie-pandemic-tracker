@@ -12,7 +12,8 @@
                      [uk.org.alienscience/leiningen-war "0.0.7"]]
   
   :gwt-modules ["zpt.Client"]
-  :gwt-options {:XdisableCastChecking ""
+  :gwt-options {:style "PRETTY"
+                :XdisableCastChecking ""
                 :XdisableClassMetadata ""}
   
   :web-content "war")
