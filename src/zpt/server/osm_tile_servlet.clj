@@ -2,6 +2,7 @@
   (:gen-class :extends "javax.servlet.http.HttpServlet")
   (:use zpt.util)
   (:require [zpt.server.osm-tile-cache-writer :as cache])
+  (:import [java.io IOException])
   (:import [java.awt.color ColorSpace])
   (:import [java.awt.image ColorConvertOp])
   (:import [javax.imageio ImageIO])
@@ -10,11 +11,14 @@
 
 (let [client (HttpClient. (MultiThreadedHttpConnectionManager.))]
   (defn- read-img [z x y]
-    (let [req (GetMethod. (str "http://tile.openstreetmap.org/" z "/" x "/" y ".png"))]
+    (let [url (str "http://tile.openstreetmap.org/" z "/" x "/" y ".png")
+          req (GetMethod. url)]
       (try 
 	      (.executeMethod client req)
-	      (with-open [in (.getResponseBodyAsStream req)]
-	        (ImageIO/read in))
+        (if (= 200 (.getStatusCode req))
+          (with-open [in (.getResponseBodyAsStream req)]
+            (ImageIO/read in))
+          (throw (IOException. (str "Upstream returned " (.getStatusCode req) " for " url))))
        (finally (.releaseConnection req))))))
 
 (defn- grayscale [img]
