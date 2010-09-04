@@ -92,4 +92,3 @@
   (init-dirs)
   (draw-images)
   (cut-tiles))
-

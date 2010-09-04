@@ -7,5 +7,10 @@
 	<classpathentry kind="lib" path="lib/clojure-contrib-1.2.0.jar"/>
 	<classpathentry kind="lib" path="lib/xpp3-1.1.4c.jar"/>
 	<classpathentry kind="lib" path="lib/commons-io-1.4.jar"/>
+	<classpathentry kind="lib" path="lib/dev/globetrotter-0.0.1-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="lib/dev/gwt-dnd-3.0.1.jar"/>
+	<classpathentry kind="lib" path="lib/dev/gwt-incubator-20100204-r1747.jar"/>
+	<classpathentry kind="lib" path="lib/dev/gwt-user-2.0.4.jar"/>
+	<classpathentry kind="lib" path="lib/dev/mxhr-0.0.1-SNAPSHOT.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
