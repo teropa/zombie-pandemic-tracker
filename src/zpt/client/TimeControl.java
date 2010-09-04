@@ -85,30 +85,39 @@ public class TimeControl extends Composite {
 	}
 	
 	private void moveKnob(double left) {
-		int stepWidth = sliderTrack.getOffsetWidth() / Client.NUM_STEPS;
 		double width = sliderTrack.getOffsetWidth();
 		int step = (int)Math.floor((left / width) * Client.NUM_STEPS);
-		sliderTrack.setWidgetPosition(sliderKnob, (int)(step * stepWidth + 0.5 * stepWidth - 0.5 * sliderKnob.getOffsetWidth()), sliderTrack.getWidgetTop(sliderKnob));
+		sliderTrack.setWidgetPosition(sliderKnob, getSnapPositionForStep(step), sliderTrack.getWidgetTop(sliderKnob));
 		layer.setTimestep(step);
-		moveKnobToStep(step);
-		
+		moveKnobToStep(step);		
 	}
 
 	void moveKnobToStep(int step) {
+		sliderTrack.setWidgetPosition(sliderKnob, getSnapPositionForStep(step), sliderTrack.getWidgetTop(sliderKnob));
+		updateInfo(step);
+	}
+
+	public int getSnapPositionForX(int at) {
+		double width = sliderTrack.getOffsetWidth();
+		int step = (int)Math.floor((at / width) * Client.NUM_STEPS);
+		return getSnapPositionForStep(step);
+	}
+	
+	public int getSnapPositionForStep(int step) {
 		int stepWidth = sliderTrack.getOffsetWidth() / Client.NUM_STEPS;
-		sliderTrack.setWidgetPosition(sliderKnob, (int)(step * stepWidth + 0.5 * stepWidth - 0.5 * sliderKnob.getOffsetWidth()), sliderTrack.getWidgetTop(sliderKnob));
-		updateInfo(step);
+		return (int)(step * stepWidth + 0.5 * stepWidth - 0.5 * sliderKnob.getOffsetWidth());
+	}
+
+	public void onKnobDragged(int at) {
+		double width = sliderTrack.getOffsetWidth();
+		int step = (int)Math.floor((at / width) * Client.NUM_STEPS);
+		updateInfo(step);	
 	}
 	
-	public void onKnobMoved(int i) {
-		double width = sliderTrack.getOffsetWidth();
-		int step = (int)Math.floor((i / width) * Client.NUM_STEPS);
-		updateInfo(step);
-	}
 	
-	public void onKnobLingered(int lastLoc) {
+	public void onKnobLingered(int at) {
 		double width = sliderTrack.getOffsetWidth();
-		int step = (int)Math.floor((lastLoc / width) * Client.NUM_STEPS);
+		int step = (int)Math.floor((at / width) * Client.NUM_STEPS);
 		layer.setTimestep(step);		
 	}
 

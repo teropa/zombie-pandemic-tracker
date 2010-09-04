@@ -26,12 +26,17 @@ public class TimeControlDragController extends PickupDragController {
 	
 	@Override
 	public void dragMove() {
-		super.dragMove();
-		lingerTimer.cancel();
 		lastLoc = context.desiredDraggableX - getBoundaryOffsetX();
 		lastLoc = Math.max(0, lastLoc);
 		lastLoc = Math.min(context.boundaryPanel.getOffsetWidth() - context.draggable.getOffsetWidth(), lastLoc);
-		ctrl.onKnobMoved(lastLoc);
+		lastLoc = ctrl.getSnapPositionForX(lastLoc);
+		context.desiredDraggableX = lastLoc + getBoundaryOffsetX();
+		
+		super.dragMove();
+		
+		ctrl.onKnobDragged(lastLoc);
+		
+		lingerTimer.cancel();
 		lingerTimer.schedule(500);
 	}
 	
