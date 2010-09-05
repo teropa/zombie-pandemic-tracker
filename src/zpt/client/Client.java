@@ -50,7 +50,7 @@ public class Client implements EntryPoint {
 		LayoutPanel mainPanel = new LayoutPanel();
 		
 		map = new Map("100%", "100%");
-		map.setResolutions(getResolutions(), 1);
+		map.setResolutions(getResolutions(), 2);
 		map.setCenter(new LonLat(391357.58482, 5476196.443835));
 		map.getView().setBackgroundColor(new Color("#c8c8c8"));
 		OpenStreetMapLayer base = new OpenStreetMapLayer(GWT.getHostPageBaseURL() + "tiles/osm", "Mapnik", true);
@@ -96,8 +96,8 @@ public class Client implements EntryPoint {
 	}
 
 	private double[] getResolutions() {
-		double[] resolutions = new double[6];
-		for (int i=0, r=2 ; i < 6 ; i++, r++) {
+		double[] resolutions = new double[7];
+		for (int i=0, r=1 ; i < 7 ; i++, r++) {
 			resolutions[i] = OpenStreetMapLayer.SUPPORTED_RESOLUTIONS[r];
 		}
 		return resolutions;
