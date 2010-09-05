@@ -1,7 +1,8 @@
 (ns zpt.server.osm-tile-cache-writer
   (:use zpt.util))
 
-(def base "/home/node/osm_tile_cache/tiles/osm")
+(def base (or (System/getenv "OSM_CACHE_DIR")
+              "/home/node/osm_tile_cache/tiles/osm"))
 
 (defn- write [_ img z x y]
   (let [f (str base "/" z "/" x "/" y ".png")]

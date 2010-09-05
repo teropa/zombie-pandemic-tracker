@@ -5,7 +5,8 @@
   (:import [org.apache.commons.codec.binary Base64])
   (:import [org.apache.commons.io FileUtils]))
 
-(def base "/home/node/osm_tile_cache/tiles/solanum")
+(def base (or (System/getenv "SOLANUM_TILE_DIR")
+              "/home/node/osm_tile_cache/tiles/solanum"))
 
 (defn- requested-tiles [req]
   (map

@@ -31,7 +31,7 @@
           (.fillPolygon g xs ys (count poly))))
       (.dispose g)
       (ImageIO/write img "png" (File. (str out-dir "/" idx "/" (:z level) ".png"))))))
-        
+
 	
 	  	
 		
