@@ -1,6 +1,16 @@
 a img {
 	border: 0;
 }
+h1 {
+	margin: 0;
+	line-height: 0.85em;
+	font-size: 2.5em;
+}
+p {
+	color: white;
+	font-size: 1.1em;
+}
+
 .moveCursor {
 	cursor: move;
 }
@@ -18,7 +28,29 @@ a img {
 	background-repeat: repeat-y;
 }
 
-.hand {
+#info {
+	padding: 20px;
+}
+.zed-opaque {
+	color: #ee5555;
+}
+.footnote {
+	font-style: italic;
+	font-size: 0.8em;
+}
+.patientZeroLink {
+	display: inline;
+	cursor: pointer;
+	text-decoration: underline;
+}
+#twitter {
+	margin-left: 56px;
+}
+#fb {
+	margin-left: 65px;
+}
+#src {
+	text-align: center;
 }
 
 .TimeControl {
@@ -61,15 +93,3 @@ a img {
 	color: #ff0000;
 }
 
-.koBadge {
-	margin-left: 40px;
-}
-.tweetButton {
-	margin-left: 56px;
-}
-.like {
-	margin-left: 65px;
-}
-.src {
-	text-align: center;
-}
